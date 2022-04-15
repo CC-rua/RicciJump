@@ -5,14 +5,33 @@
     <vendor>cc-rua</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-
+    <!--    添加代码依赖-->
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.ccrua.riccijump.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.ccrua.riccijump.services.MyProjectService"/>
+        <applicationService serviceImplementation="com.github.ccrua.riccijump.services.JumpApplicationService"/>
+        <projectService serviceImplementation="com.github.ccrua.riccijump.services.JumpProjectService"/>
+        <notificationGroup id="Custom Notification Group"
+                           displayType="BALLOON"/>
     </extensions>
 
+    <!--    添加代码模板-->
+    <extensions defaultExtensionNs="com.intellij">
+        <defaultLiveTemplates file="/liveTemplates/tryLock.xml"/>
+        <liveTemplateContext
+                implementation="com.intellij.codeInsight.template.EverywhereContextType"/>
+    </extensions>
+
+    <!--    添加ide监听-->
     <applicationListeners>
-        <listener class="com.github.ccrua.riccijump.listeners.MyProjectManagerListener"
+        <listener class="com.github.ccrua.riccijump.listeners.JumpProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+    <!--    添加相应动作-->
+    <actions>
+        <action id="ricci_jump" class="com.github.ccrua.riccijump.action.JumpAction" text="R跳转"
+                description="Jump to .alpro">
+            <add-to-group group-id="HelpMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
+        </action>
+    </actions>
+
 </idea-plugin>
