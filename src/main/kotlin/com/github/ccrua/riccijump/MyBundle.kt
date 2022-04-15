@@ -1,4 +1,4 @@
-package org.jetbrains.plugins.template
+package com.github.ccrua.riccijump
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
