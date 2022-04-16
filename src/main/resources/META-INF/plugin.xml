@@ -15,7 +15,7 @@
 
     <!--    添加代码模板-->
     <extensions defaultExtensionNs="com.intellij">
-        <defaultLiveTemplates file="/liveTemplates/tryLock.xml"/>
+        <defaultLiveTemplates file="/liveTemplates/javaTemplates.xml"/>
         <liveTemplateContext
                 implementation="com.intellij.codeInsight.template.EverywhereContextType"/>
     </extensions>
@@ -27,10 +27,19 @@
     </applicationListeners>
     <!--    添加相应动作-->
     <actions>
-        <action id="ricci_jump" class="com.github.ccrua.riccijump.action.JumpAction" text="R跳转"
-                description="Jump to .alpro">
+        <action id="ricci_jump_alter" class="com.github.ccrua.riccijump.action.AlterAction" text="打印hhh"
+                description="Alter hhh">
             <add-to-group group-id="HelpMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
+        </action>
+
+        <action id="jumpToProto" class="com.github.ccrua.riccijump.action.JumpAction" text="JumpAction"
+                description="JumpAction" icon="MyIcons.jumpActionIcon">
+            <add-to-group group-id="CodeEditorBaseGroup" anchor="first"/>
+        </action>
+        <action id="ViewAction" class="com.github.ccrua.riccijump.action.ViewAction" text="ViewAction"
+                description="ViewAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
 

@@ -1,0 +1,30 @@
+<templateSet group="JAVA">
+    <!-- 添加锁-->
+    <template name="trylock" value="_lock();&#10;try {&#10;    $start$&#10;} finally {&#10;    _unlock();&#10;}"
+              description="快速加锁" toReformat="false" toShortenFQNames="true">
+        <variable name="start" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="JAVA_CODE" value="true"/>
+        </context>
+    </template>
+
+    <!-- 单例化-->
+    <template name="myInstance"
+              value="//////单例的//////&#10;private static final $Instance$ _s_instance = new $Instance$();&#10;&#10;public static $Instance$ getInstance() {&#10;    return _s_instance;&#10;}&#10;&#10;private $Instance$() {&#10;}&#10;"
+              description="单例模式" toReformat="false" toShortenFQNames="true">
+        <variable name="Instance" expression="className()" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="JAVA_CODE" value="true"/>
+        </context>
+    </template>
+
+    <!-- 添加一个锁对象-->
+    <template name="mylock"
+              value="private $Mutex$ _m_mutex;&#10;&#10;protected void _lock() {&#10;    _m_mutex.lock();&#10;}&#10;&#10;protected void _unlock() {&#10;    _m_mutex.unlock();&#10;}"
+              description="锁对象" toReformat="false" toShortenFQNames="true">
+        <variable name="Mutex" expression="" defaultValue="" alwaysStopAt="true"/>
+        <context>
+            <option name="JAVA_CODE" value="true"/>
+        </context>
+    </template>
+</templateSet>

@@ -23,6 +23,11 @@ version = properties("pluginVersion")
 repositories {
     mavenCentral()
 }
+dependencies {
+    implementation("org.jetbrains.intellij.plugins:structure-intellij:3.208")
+    implementation("org.jetbrains.intellij.plugins:structure-intellij-classes:3.208")
+    implementation("com.meschbach.psi:psi-core:2.4")
+}
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {
