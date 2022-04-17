@@ -5,6 +5,10 @@
     <vendor>cc-rua</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.java</depends>
+    <depends>com.intellij.modules.java</depends>
+
     <!--    添加代码依赖-->
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ccrua.riccijump.services.JumpApplicationService"/>
@@ -40,6 +44,7 @@
         <action id="ViewAction" class="com.github.ccrua.riccijump.action.ViewAction" text="ViewAction"
                 description="ViewAction">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut first-keystroke="shift ctrl alt f" keymap="$default"/>
         </action>
     </actions>
 

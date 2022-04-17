@@ -1,21 +1,17 @@
 package com.github.ccrua.riccijump.action;
 
 import com.github.ccrua.riccijump.notify.JumpNotifierCenter;
+import com.github.ccrua.riccijump.services.open.OpenTypeMgr;
+import com.github.ccrua.riccijump.services.open._AOpenTypeFunc;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.search.FilenameIndex;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiUtilBase;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.search.PsiShortNamesCache;
 
 public class ViewAction extends AnAction {
 
@@ -35,13 +31,19 @@ public class ViewAction extends AnAction {
             JumpNotifierCenter.notifyError(project, "psiFile not found");
             return;
         }
-        //检查是否是java类型
-        if (!psiFile.getName().endsWith(".java")) {
-            JumpNotifierCenter.notifyError(project, "not *.java");
+        _AOpenTypeFunc openFunc = OpenTypeMgr.getInstance().getOpenFunc(psiFile.getClass());
+        //找不到处理方法
+        if (openFunc == null) {
+            System.out.printf("openFunc not found %s", psiFile.getClass());
             return;
         }
-        //psi
-        @NotNull PsiFile[] filesByName = FilenameIndex.getFilesByName(project, "Main.java", GlobalSearchScope.allScope(project));
-
+        //不带后缀的文件名
+        String fileShortName = openFunc.getShortName(psiFile);
+        //查询跳转操作
+        PsiFile[] filesByName = PsiShortNamesCache.getInstance(project).getFilesByName(fileShortName);
+        for (PsiFile file : filesByName) {
+            OpenFileDescriptor openFileDescriptor = new OpenFileDescriptor(project, file.getVirtualFile(), openFunc.getTextOffSet(file));
+            FileEditorManager.getInstance(project).openTextEditor(openFileDescriptor, true);
+        }
     }
 }
