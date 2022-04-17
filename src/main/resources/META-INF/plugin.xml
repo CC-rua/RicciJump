@@ -8,6 +8,10 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.java</depends>
     <depends>com.intellij.modules.java</depends>
+    <depends >com.intellij.modules.python</depends>
+    <depends >com.jetbrains.intellij.textmate:textmate-core:202.6397.94</depends>
+
+
 
     <!--    添加代码依赖-->
     <extensions defaultExtensionNs="com.intellij">
@@ -36,15 +40,10 @@
             <add-to-group group-id="HelpMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
         </action>
-
-        <action id="jumpToProto" class="com.github.ccrua.riccijump.action.JumpAction" text="JumpAction"
-                description="JumpAction" icon="MyIcons.jumpActionIcon">
-            <add-to-group group-id="CodeEditorBaseGroup" anchor="first"/>
-        </action>
         <action id="ViewAction" class="com.github.ccrua.riccijump.action.ViewAction" text="ViewAction"
-                description="ViewAction">
+                description="ViewAction" icon="MyIcons.jumpActionIcon">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <keyboard-shortcut first-keystroke="shift ctrl alt f" keymap="$default"/>
+            <keyboard-shortcut first-keystroke="shift ctrl b" keymap="$default"/>
         </action>
     </actions>
 

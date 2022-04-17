@@ -21,12 +21,22 @@ version = properties("pluginVersion")
 
 // Configure project's dependencies
 repositories {
+    google()
     mavenCentral()
+    maven{
+        url = uri("https://maven.aliyun.com/repository/public/")
+        metadataSources {
+            mavenPom()
+            artifact()
+        }
+    }
 }
 dependencies {
     implementation("org.jetbrains.intellij.plugins:structure-intellij:3.208")
     implementation("org.jetbrains.intellij.plugins:structure-intellij-classes:3.208")
     implementation("com.meschbach.psi:psi-core:2.4")
+    // https://mvnrepository.com/artifact/com.jetbrains.intellij.textmate/textmate-core
+    implementation("com.jetbrains.intellij.textmate:textmate-core:203.7717.56")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -36,8 +46,10 @@ intellij {
     type.set(properties("platformType"))
 
     // Plugin Dependencies. Uses `platformPlugins` property from the gradle.properties file.
-    plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
-    plugins.set(listOf("com.intellij.java"))
+    with(plugins) {
+        set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
+        set(listOf("com.intellij.java"))
+    }
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
@@ -119,4 +131,5 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
     }
+
 }

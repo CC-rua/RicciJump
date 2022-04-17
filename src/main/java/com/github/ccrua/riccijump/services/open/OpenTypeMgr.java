@@ -2,6 +2,7 @@ package com.github.ccrua.riccijump.services.open;
 
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.PsiJavaFileImpl;
+import com.intellij.psi.impl.source.PsiPlainTextFileImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,8 @@ public class OpenTypeMgr {
         _m_openFuncMap = new HashMap<>();
 
         regist(PsiJavaFileImpl.class, new OpenTypeFunc_Java());
+        regist(PsiPlainTextFileImpl.class, new OpenTypeFunc_Text());
+        regist(TextMateFile.class, new OpenTypeFunc_Python());
     }
 
     /**
