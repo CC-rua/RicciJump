@@ -14,8 +14,6 @@ import static com.github.ccrua.riccijump.comm.RicciUntil.AL_DB_BASE_BO_NAME;
 import static com.github.ccrua.riccijump.comm.RicciUntil.AL_PROTOCOL_INTERFACE_NAME;
 
 public class OpenTypeFunc_Java implements _AOpenTypeFunc {
-
-
     /**
      * 将文件转换成要跳转的文件名
      *

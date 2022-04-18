@@ -21,22 +21,18 @@ version = properties("pluginVersion")
 
 // Configure project's dependencies
 repositories {
-    google()
     mavenCentral()
-//    maven{
-//        url = uri("https://maven.aliyun.com/repository/public/")
-//        metadataSources {
-//            mavenPom()
-//            artifact()
-//        }
-//    }
+    maven {
+        url = uri("https://www.jetbrains.com/intellij-repository/releases/")
+    }
 }
 dependencies {
     implementation("org.jetbrains.intellij.plugins:structure-intellij:3.208")
     implementation("org.jetbrains.intellij.plugins:structure-intellij-classes:3.208")
     implementation("com.meschbach.psi:psi-core:2.4")
-    // https://mvnrepository.com/artifact/com.jetbrains.intellij.textmate/textmate-core
-//    implementation("com.jetbrains.intellij.textmate:textmate-core:203.7717.56")
+    // https://mvnrepository.com/artifact/com.jetbrains.intellij.textmate/textmate
+    implementation("com.jetbrains.intellij.textmate:textmate:221.5080.210")
+
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
