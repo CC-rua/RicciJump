@@ -23,20 +23,20 @@ version = properties("pluginVersion")
 repositories {
     google()
     mavenCentral()
-    maven{
-        url = uri("https://maven.aliyun.com/repository/public/")
-        metadataSources {
-            mavenPom()
-            artifact()
-        }
-    }
+//    maven{
+//        url = uri("https://maven.aliyun.com/repository/public/")
+//        metadataSources {
+//            mavenPom()
+//            artifact()
+//        }
+//    }
 }
 dependencies {
     implementation("org.jetbrains.intellij.plugins:structure-intellij:3.208")
     implementation("org.jetbrains.intellij.plugins:structure-intellij-classes:3.208")
     implementation("com.meschbach.psi:psi-core:2.4")
     // https://mvnrepository.com/artifact/com.jetbrains.intellij.textmate/textmate-core
-    implementation("com.jetbrains.intellij.textmate:textmate-core:203.7717.56")
+//    implementation("com.jetbrains.intellij.textmate:textmate-core:203.7717.56")
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -72,6 +72,7 @@ tasks {
         withType<JavaCompile> {
             sourceCompatibility = it
             targetCompatibility = it
+            options.encoding = "UTF-8"
         }
         withType<KotlinCompile> {
             kotlinOptions.jvmTarget = it
@@ -131,5 +132,6 @@ tasks {
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
     }
+
 
 }

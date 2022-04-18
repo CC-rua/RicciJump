@@ -18,7 +18,7 @@ public class OpenTypeMgr {
 
         regist(PsiJavaFileImpl.class, new OpenTypeFunc_Java());
         regist(PsiPlainTextFileImpl.class, new OpenTypeFunc_Text());
-        regist(TextMateFile.class, new OpenTypeFunc_Python());
+//        regist(TextMateFile.class, new OpenTypeFunc_Python());
     }
 
     /**

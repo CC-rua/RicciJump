@@ -8,8 +8,8 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.java</depends>
     <depends>com.intellij.modules.java</depends>
-    <depends >com.intellij.modules.python</depends>
-    <depends >com.jetbrains.intellij.textmate:textmate-core:202.6397.94</depends>
+<!--    <depends >com.intellij.modules.python</depends>-->
+<!--    <depends >com.jetbrains.intellij.textmate:textmate-core:202.6397.94</depends>-->
 
 
 
@@ -40,8 +40,13 @@
             <add-to-group group-id="HelpMenu" anchor="first"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt R"/>
         </action>
-        <action id="ViewAction" class="com.github.ccrua.riccijump.action.ViewAction" text="ViewAction"
-                description="ViewAction" icon="MyIcons.jumpActionIcon">
+        <action id="ViewAction" class="com.github.ccrua.riccijump.action.ViewAction" text="Jump To .alpro"
+                description="Java jump to .alpro" icon="MyIcons.jumpActionIcon">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut first-keystroke="shift ctrl b" keymap="$default"/>
+        </action>
+        <action id="JumpDealerAction" class="com.github.ccrua.riccijump.action.JumpDealerAction" text="Jump To Dealer"
+                description="Protocol jump to dealer" icon="MyIcons.jumpActionIcon">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut first-keystroke="shift ctrl b" keymap="$default"/>
         </action>

@@ -7,11 +7,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.search.PsiShortNamesCache;
 
 public class ViewAction extends AnAction {
 
@@ -37,13 +34,6 @@ public class ViewAction extends AnAction {
             System.out.printf("openFunc not found %s", psiFile.getClass());
             return;
         }
-        //不带后缀的文件名
-        String fileShortName = openFunc.getShortName(psiFile);
-        //查询跳转操作
-        PsiFile[] filesByName = PsiShortNamesCache.getInstance(project).getFilesByName(fileShortName);
-        for (PsiFile file : filesByName) {
-            OpenFileDescriptor openFileDescriptor = new OpenFileDescriptor(project, file.getVirtualFile(), openFunc.getTextOffSet(file));
-            FileEditorManager.getInstance(project).openTextEditor(openFileDescriptor, true);
-        }
+        openFunc.jump(psiFile);
     }
 }

@@ -1,12 +1,22 @@
 package com.github.ccrua.riccijump.services.open;
 
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.OpenFileDescriptor;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.PsiPlainTextFileImpl;
+import com.intellij.psi.search.PsiShortNamesCache;
+import org.jetbrains.annotations.NotNull;
 
 public class OpenTypeFunc_Text implements _AOpenTypeFunc {
     private static final String AL_PROTO_SUFFIX = ".alpro";
 
-    @Override
+    /**
+     * 将文件转换成要跳转的文件名
+     *
+     * @param _psiFile 源文件
+     * @return String
+     */
     public String getShortName(PsiFile _psiFile) {
         PsiPlainTextFileImpl javaFile = (PsiPlainTextFileImpl) _psiFile;
         String name = javaFile.getName();
@@ -17,8 +27,27 @@ public class OpenTypeFunc_Text implements _AOpenTypeFunc {
         return "";
     }
 
-    @Override
+
+    /**
+     * 跳转位置
+     *
+     * @param _psiFile 所在文件
+     * @return int
+     */
     public int getTextOffSet(PsiFile _psiFile) {
         return _psiFile.getTextOffset();
+    }
+
+    @Override
+    public void jump(PsiFile _psiFile) {
+        //不带后缀的文件名
+        String fileShortName = getShortName(_psiFile);
+        //查询跳转操作
+        @NotNull Project project = _psiFile.getProject();
+        PsiFile[] filesByName = PsiShortNamesCache.getInstance(project).getFilesByName(fileShortName);
+        for (PsiFile file : filesByName) {
+            OpenFileDescriptor openFileDescriptor = new OpenFileDescriptor(project, file.getVirtualFile(), getTextOffSet(file));
+            FileEditorManager.getInstance(project).openTextEditor(openFileDescriptor, true);
+        }
     }
 }
