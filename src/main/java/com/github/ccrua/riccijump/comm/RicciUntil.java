@@ -5,9 +5,27 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
 
 public class RicciUntil {
+    //协议超类
     public static final String AL_PROTOCOL_INTERFACE_NAME = "_IALProtocolStructure";
-
+    //BO超类
     public static final String AL_DB_BASE_BO_NAME = "IBaseBO";
+    //协议文件后缀
+    public static final String AL_PROTO_SUFFIX = ".alpro";
+    //协议处理类超类
+    public static final String PROTOCOL_USER_DEALER = "_ATWCGBasicRequestSubOrderDealer_CustomCommiter";
+    //协议处理类超类
+    public static final String PROTOCOL_REQ_DEALER = "_AWCGBasicRequestSubOrderDealer";
+    //template
+    public static final String ALProTemplate = "JavaPackage $PACKAGE$;\n" +
+            "$CS_PACKAGE$" +
+            "\n" +
+            "/**********************************************************\n" +
+            " * \n" +
+            " **********************************************************/\n" +
+            "ALProtocol $FILE_NAME$ <$MAIN_ID$, $SUB_ID$>\n" +
+            "{\n" +
+
+            "}";
 
     public static String transStrToSnakeType(String _selected) {
         _selected = _selected.replaceAll("[A-Z]", "_$0");
@@ -68,7 +86,7 @@ public class RicciUntil {
     }
 
     //驼峰转蛇形
-    public String transSnakeToStr(String _selected) {
+    public static String transSnakeToStr(String _selected) {
         _selected = _selected.replaceAll("_([A-Z])", "$1");
         int i = -32;
 

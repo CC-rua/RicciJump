@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jetbrains.intellij.plugins:structure-intellij-classes:3.208")
     implementation("com.meschbach.psi:psi-core:2.4")
     // https://mvnrepository.com/artifact/com.jetbrains.intellij.textmate/textmate
-    implementation("com.jetbrains.intellij.textmate:textmate:221.5080.210")
+//    implementation("com.jetbrains.intellij.textmate:textmate:221.5080.210")
 
 }
 

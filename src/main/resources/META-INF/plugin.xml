@@ -8,8 +8,6 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.java</depends>
     <depends>com.intellij.modules.java</depends>
-    <depends >com.intellij.modules.python</depends>
-
 
 
     <!--    添加代码依赖-->
@@ -48,6 +46,10 @@
                 description="Protocol jump to dealer" icon="MyIcons.jumpActionIcon">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
             <keyboard-shortcut first-keystroke="shift ctrl b" keymap="$default"/>
+        </action>
+        <action id="newAlproAction" class="com.github.ccrua.riccijump.action.NewAlproAction" text="newAlproAction"
+                description="newAlproAction">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </action>
     </actions>
 

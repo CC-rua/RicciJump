@@ -1,5 +1,6 @@
 package com.github.ccrua.riccijump.services.open;
 
+import com.github.ccrua.riccijump.comm.RicciUntil;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
@@ -10,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.github.ccrua.riccijump.comm.RicciUntil.AL_PROTO_SUFFIX;
 
-public class OpenTypeFunc_Text implements _AOpenTypeFunc {
-
+public class OpenTypeFunc_Python implements _AOpenTypeFunc {
 
     /**
      * 将文件转换成要跳转的文件名
@@ -22,9 +22,12 @@ public class OpenTypeFunc_Text implements _AOpenTypeFunc {
     public String getShortName(PsiFile _psiFile) {
         PsiPlainTextFileImpl javaFile = (PsiPlainTextFileImpl) _psiFile;
         String name = javaFile.getName();
-        //以 .alpro 结尾的text文件
+        //以 .py 结尾的text文件
         if (name.endsWith(AL_PROTO_SUFFIX)) {
-            return name.replace(".alpro", ".java");
+            String replacePy = name.replace(".py", ".java");
+            replacePy = RicciUntil.transSnakeToStr(replacePy);
+            replacePy += "BO";
+            return replacePy;
         }
         return "";
     }

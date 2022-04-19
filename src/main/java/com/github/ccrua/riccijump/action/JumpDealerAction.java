@@ -22,10 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.ccrua.riccijump.comm.RicciUntil.AL_PROTOCOL_INTERFACE_NAME;
+import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_REQ_DEALER;
+import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_USER_DEALER;
 
 public class JumpDealerAction extends AnAction {
-    private static final String PROTOCOL_USER_DEALER = "NPUserMsgDealer";
-    private static final String PROTOCOL_REQ_DEALER = "NPRequestDealer";
+
 
 
 
@@ -59,12 +60,12 @@ public class JumpDealerAction extends AnAction {
         curJavaFileName = curJavaFileName.replace(".java", "");
 
         ArrayList<PsiClass> dealersPsiClasses = new ArrayList<>();
-        //查找超类 NPUserMsgDealer
+        //查找超类 _ATWCGBasicRequestSubOrderDealer_CustomCommiter
         dealersPsiClasses.addAll(List.of(PsiShortNamesCache.getInstance(project)
-                .getClassesByName(PROTOCOL_USER_DEALER, GlobalSearchScope.projectScope(project))));
-        //查找超类 NPRequestDealer
+                .getClassesByName(PROTOCOL_USER_DEALER, GlobalSearchScope.everythingScope(project))));
+        //查找超类 _AWCGBasicRequestSubOrderDealer
         dealersPsiClasses.addAll(List.of(PsiShortNamesCache.getInstance(project)
-                .getClassesByName(PROTOCOL_REQ_DEALER, GlobalSearchScope.projectScope(project))));
+                .getClassesByName(PROTOCOL_REQ_DEALER, GlobalSearchScope.everythingScope(project))));
 
         //遍历这些类
         for (PsiClass dealersPsiClass : dealersPsiClasses) {
