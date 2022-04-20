@@ -4,11 +4,8 @@ import com.github.ccrua.riccijump.ui.NewAlproUI;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.openapi.actionSystem.CommonDataKeys.VIRTUAL_FILE;
 
@@ -23,8 +20,6 @@ public class NewAlproAction extends AnAction {
         if (virtualFile == null) {
             return;
         }
-        //运行时的模块
-        @Nullable Module module = ModuleUtil.findModuleForFile(virtualFile, project);
         NewAlproUI alproUI = new NewAlproUI(project, e);
         alproUI.showAndGet();
     }

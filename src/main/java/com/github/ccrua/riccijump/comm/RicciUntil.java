@@ -16,11 +16,11 @@ public class RicciUntil {
     //协议处理类超类
     public static final String PROTOCOL_REQ_DEALER = "_AWCGBasicRequestSubOrderDealer";
     //template
-    public static final String ALProTemplate = "JavaPackage $PACKAGE$;\n" +
+    public static final String ALProTemplate = "JavaPackage $PACKAGE$\n" +
             "$CS_PACKAGE$" +
             "\n" +
             "/**********************************************************\n" +
-            " * \n" +
+            " * " + "$DESCRIBE$" + "\n" +
             " **********************************************************/\n" +
             "ALProtocol $FILE_NAME$ <$MAIN_ID$, $SUB_ID$>\n" +
             "{\n" +
