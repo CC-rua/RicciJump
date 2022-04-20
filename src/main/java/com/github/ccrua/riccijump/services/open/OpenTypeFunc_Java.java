@@ -69,7 +69,8 @@ public class OpenTypeFunc_Java implements _AOpenTypeFunc {
             }
             //这个类是枚举的处理
             if (aClass.isEnum()) {
-
+                //去协议所在文件夹里找
+//                LocalFileSystem.getInstance().refreshAndFindFileByPath();
             } else {
                 //不带后缀的文件名
                 String fileShortName = getShortName(aClass);

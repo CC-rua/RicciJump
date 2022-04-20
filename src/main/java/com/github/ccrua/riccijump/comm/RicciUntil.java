@@ -15,6 +15,9 @@ public class RicciUntil {
     public static final String PROTOCOL_USER_DEALER = "_ATWCGBasicRequestSubOrderDealer_CustomCommiter";
     //协议处理类超类
     public static final String PROTOCOL_REQ_DEALER = "_AWCGBasicRequestSubOrderDealer";
+    //协议所在文件夹
+    public static final String NP_PROTOCOL_SCRIPTS_DICTIONARY = "/NPServerProtocol/ProtocolScripts";
+    public static final String MG_PROTOCOL_SCRIPTS_DICTIONARY = "/MGServerProtocol/ProtocolScripts";
     //template
     public static final String ALProTemplate = "JavaPackage $PACKAGE$\n" +
             "$CS_PACKAGE$" +
