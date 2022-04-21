@@ -12,8 +12,28 @@ public class JumpProjectManagerListener implements ProjectManagerListener {
     @Override
     public void projectOpened(@NotNull Project project) {
         project.getService(JumpProjectService.class);
-        VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(project.getBasePath() +
+        VirtualFile fileByPath = null;
+        //是NP
+        VirtualFile npFilePath = LocalFileSystem.getInstance().findFileByPath(project.getBasePath() +
                 RicciUntil.NP_PROTOCOL_SCRIPTS_DICTIONARY);
+        if (npFilePath != null) {
+            fileByPath = npFilePath;
+        }
+        //是MG
+        VirtualFile mgFilePath = LocalFileSystem.getInstance().findFileByPath(project.getBasePath() +
+                RicciUntil.MG_PROTOCOL_SCRIPTS_DICTIONARY);
+        if (mgFilePath != null) {
+            fileByPath = mgFilePath;
+        }
+        //是CHAT
+        VirtualFile chatFilePath = LocalFileSystem.getInstance().findFileByPath(project.getBasePath() +
+                RicciUntil.CHAT_PROTOCOL_SCRIPTS_DICTIONARY);
+        if (chatFilePath != null) {
+            fileByPath = chatFilePath;
+        }
+        if (fileByPath != null) {
+            RicciUntil.PROTOCOL_SCRIPTS_DICTIONARY = fileByPath.getPath();
+        }
 
     }
 }

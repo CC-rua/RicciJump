@@ -1,6 +1,7 @@
 package com.github.ccrua.riccijump.ui;
 
 import com.github.ccrua.riccijump.comm.RicciUntil;
+import com.github.ccrua.riccijump.notify.JumpNotifierCenter;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -16,6 +17,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import static com.github.ccrua.riccijump.comm.RicciUntil.AL_PROTO_SUFFIX;
 import static com.intellij.openapi.actionSystem.CommonDataKeys.PSI_FILE;
@@ -68,7 +70,7 @@ public class NewAlproUI extends DialogWrapper {
         }
         _m_path = virtualFile.getPath();
         //将 path 解析成 packagename
-        String[] splitName = _m_path.split("ProtocolScripts/");
+        String[] splitName = _m_path.split("ProtocolScripts/|protocolScripts/");
         if (splitName.length < 2) {
             return;
         }
@@ -127,12 +129,16 @@ public class NewAlproUI extends DialogWrapper {
 
         String filePath = _projectPath + "/" + _name + AL_PROTO_SUFFIX;
         File file = new File(filePath);
+        if (file.exists()) {
+            JumpNotifierCenter.notifyError(_m_project, "文件已存在");
+            return;
+        }
         File parentFile = file.getParentFile();
         try {
             if (!parentFile.exists() && !parentFile.mkdirs()) {
                 throw new IOException("目录创建失败: " + parentFile.getPath());
             }
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(file, StandardCharsets.UTF_8);
             fileWriter.write(_content);
             fileWriter.close();
         } catch (IOException e) {

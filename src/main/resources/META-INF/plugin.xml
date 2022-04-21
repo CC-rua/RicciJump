@@ -48,7 +48,7 @@
             <keyboard-shortcut first-keystroke="shift ctrl b" keymap="$default"/>
         </action>
         <action id="newAlproAction" class="com.github.ccrua.riccijump.action.NewAlproAction" text="Gen Alpro"
-                description="生成协议文件">
+                description="生成协议文件" icon="MyIcons.jumpActionIcon">
             <add-to-group group-id="ProjectViewPopupMenu" relative-to-action="WeighingNewGroup" anchor="after"/>
         </action>
     </actions>

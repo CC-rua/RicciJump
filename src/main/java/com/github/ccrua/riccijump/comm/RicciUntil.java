@@ -15,9 +15,14 @@ public class RicciUntil {
     public static final String PROTOCOL_USER_DEALER = "_ATWCGBasicRequestSubOrderDealer_CustomCommiter";
     //协议处理类超类
     public static final String PROTOCOL_REQ_DEALER = "_AWCGBasicRequestSubOrderDealer";
+    //协议处理类超类
+    public static final String PROTOCOL_BASIC_DEALER = "_AALBasicProtocolSubOrderDealer";
+
+    public static final String PROTOCOL_BASIC_DEALER_NP = "NPRequestDispatcher";
     //协议所在文件夹
     public static final String NP_PROTOCOL_SCRIPTS_DICTIONARY = "/NPServerProtocol/ProtocolScripts";
     public static final String MG_PROTOCOL_SCRIPTS_DICTIONARY = "/MGServerProtocol/ProtocolScripts";
+    public static final String CHAT_PROTOCOL_SCRIPTS_DICTIONARY = "/ChatServerProtocol/protocolScripts";
     //template
     public static final String ALProTemplate = "JavaPackage $PACKAGE$\n" +
             "$CS_PACKAGE$" +
@@ -29,6 +34,8 @@ public class RicciUntil {
             "{\n" +
 
             "}";
+    public static String PROTOCOL_SCRIPTS_DICTIONARY = "";
+
 
     public static String transStrToSnakeType(String _selected) {
         _selected = _selected.replaceAll("[A-Z]", "_$0");

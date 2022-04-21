@@ -17,17 +17,17 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiShortNamesCache;
 import com.intellij.psi.search.searches.ClassInheritorsSearch;
 import com.intellij.util.Query;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.ccrua.riccijump.comm.RicciUntil.AL_PROTOCOL_INTERFACE_NAME;
+import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_BASIC_DEALER;
+import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_BASIC_DEALER_NP;
 import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_REQ_DEALER;
 import static com.github.ccrua.riccijump.comm.RicciUntil.PROTOCOL_USER_DEALER;
 
 public class JumpDealerAction extends AnAction {
-
-
 
 
     @Override
@@ -58,15 +58,27 @@ public class JumpDealerAction extends AnAction {
 
         String curJavaFileName = curJavaFile.getName();
         curJavaFileName = curJavaFileName.replace(".java", "");
-
-        ArrayList<PsiClass> dealersPsiClasses = new ArrayList<>();
         //查找超类 _ATWCGBasicRequestSubOrderDealer_CustomCommiter
-        dealersPsiClasses.addAll(List.of(PsiShortNamesCache.getInstance(project)
-                .getClassesByName(PROTOCOL_USER_DEALER, GlobalSearchScope.everythingScope(project))));
+        if (searchAndOpenFile(PROTOCOL_USER_DEALER, curJavaFileName, project)) {
+            return;
+        }
         //查找超类 _AWCGBasicRequestSubOrderDealer
-        dealersPsiClasses.addAll(List.of(PsiShortNamesCache.getInstance(project)
-                .getClassesByName(PROTOCOL_REQ_DEALER, GlobalSearchScope.everythingScope(project))));
+        if (searchAndOpenFile(PROTOCOL_REQ_DEALER, curJavaFileName, project)) {
+            return;
+        }
+        //查找超类 _AALBasicProtocolSubOrderDealer
+        if (searchAndOpenFile(PROTOCOL_BASIC_DEALER, curJavaFileName, project)) {
+            return;
+        }
+        //查找超类 NPRequestDispatcher
+        if (searchAndOpenFile(PROTOCOL_BASIC_DEALER_NP, curJavaFileName, project)) {
+            return;
+        }
+    }
 
+    public boolean searchAndOpenFile(String _searchPath, String _curJavaFileName, @NotNull Project _project) {
+        List<@NotNull PsiClass> dealersPsiClasses = List.of(PsiShortNamesCache.getInstance(_project)
+                .getClassesByName(_searchPath, GlobalSearchScope.everythingScope(_project)));
         //遍历这些类
         for (PsiClass dealersPsiClass : dealersPsiClasses) {
             //获取所有子类
@@ -77,13 +89,15 @@ public class JumpDealerAction extends AnAction {
                 }
                 PsiJavaFile psiFile = (PsiJavaFile) aClass.getContainingFile();
                 //检查是否导入过 curJavaFile
-                if (RicciUntil.fileIsImports(psiFile, curJavaFileName)) {
+                if (RicciUntil.fileIsImports(psiFile, _curJavaFileName)) {
                     //打开到指定目录
                     OpenFileDescriptor openFileDescriptor =
-                            new OpenFileDescriptor(project, psiFile.getVirtualFile(), psiFile.getTextOffset());
-                    FileEditorManager.getInstance(project).openTextEditor(openFileDescriptor, true);
+                            new OpenFileDescriptor(_project, psiFile.getVirtualFile(), psiFile.getTextOffset());
+                    FileEditorManager.getInstance(_project).openTextEditor(openFileDescriptor, true);
+                    return true;
                 }
             }
         }
+        return false;
     }
 }
